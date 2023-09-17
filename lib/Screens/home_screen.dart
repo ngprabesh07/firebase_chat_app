@@ -76,11 +76,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      drawer:  Drawer(
-        child:ListView(
+      drawer: Drawer(
+        child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-             DrawerHeader(
+            DrawerHeader(
               decoration: const BoxDecoration(
                 color: Colors.deepPurpleAccent,
               ),
@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context); // Close the drawer
               },
             ),
-             ListTile(
+            ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
               onTap: () {
@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context); // Close the drawer
               },
             ),
-             ListTile(
+            ListTile(
               leading: const Icon(Icons.notification_add),
               title: const Text('Notifications'),
               onTap: () {
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context); // Close the drawer
               },
             ),
-             ListTile(
+            ListTile(
               leading: const Icon(Icons.refresh_outlined),
               title: const Text('Storage and Data'),
               onTap: () {
@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context); // Close the drawer
               },
             ),
-             ListTile(
+            ListTile(
               leading: const Icon(Icons.language),
               title: const Text('App Language'),
               onTap: () {
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context); // Close the drawer
               },
             ),
-             ListTile(
+            ListTile(
               leading: const Icon(Icons.person_add_alt_1_outlined),
               title: const Text('Invite Friends'),
               onTap: () {
@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context); // Close the drawer
               },
             ),
-             ListTile(
+            ListTile(
               leading: const Icon(Icons.accessibility_new),
               title: const Text('About Us'),
               onTap: () {
@@ -198,11 +198,17 @@ class _HomeScreenState extends State<HomeScreen> {
     //display all user except current user
     if (_firebaseAuth.currentUser!.email != data['email']) {
       return ListTile(
-        leading:const CircleAvatar(
+        leading: CircleAvatar(
           radius: 30,
-          backgroundImage: NetworkImage('https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?size=626&ext=jpg&ga=GA1.1.615033183.1694869455&semt=ais'),
+          child: Center(
+            child: Text(
+              data['username'][0].toString(),
+              style:const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
-        title: Text(data['email'].toString(),style:const TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+        title: Text(data['username'].toString(),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         onTap: () {
           //tap event
           Navigator.push(

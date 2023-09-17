@@ -35,8 +35,7 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: 350,
-              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.8,
               child: _messageList(),
             ),
             //uder input
@@ -45,14 +44,31 @@ class _ChatScreenState extends State<ChatScreen> {
             // child: _messageInput(),
             // ),
 
-            TextFormField(
-              controller: _messageController,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: TextFormField(
+                        controller: _messageController,
+                        decoration:const InputDecoration(
+                          hintText: 'type message'
+                        ),
+                      ),
+                    ),
+                      IconButton(
+                    onPressed: () {
+                      sendMessage();
+                    },
+                    icon: const Icon(Icons.send)),
+                  ],
+                ),
+              ),
             ),
-            IconButton(
-                onPressed: () {
-                  sendMessage();
-                },
-                icon: const Icon(Icons.send)),
+          
           ],
         ),
       ),
@@ -69,7 +85,13 @@ class _ChatScreenState extends State<ChatScreen> {
             return const Text("ERROR AAYO MAKADOCS");
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return  const Padding(
+              padding:  EdgeInsets.all(78.0),
+              child:  SizedBox(
+                height: 150,
+                width: 150,
+                child:  CircularProgressIndicator()),
+            );
           }
           return SizedBox(
             child: ListView(
@@ -91,19 +113,16 @@ class _ChatScreenState extends State<ChatScreen> {
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Container(
-        height: 40,
-        width: 20,
         alignment: alignment,
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 199, 195, 211),
+          color:const  Color.fromARGB(255, 199, 195, 211),
           borderRadius: BorderRadius.circular(10)
         ),
         child: Column(
           children: [
-            // Text(data['senderEmail']),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(data['message']),
+              child: Text(data['message'],style:const TextStyle(fontWeight: FontWeight.bold),),
             ),
           ],
         ),
